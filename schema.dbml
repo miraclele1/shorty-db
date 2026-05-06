@@ -1,0 +1,139 @@
+enum content_status {
+  pending
+  approved
+  rejected
+}
+
+enum content_type {
+  short_film
+  music_video
+  trailer
+  stream
+}
+
+table content {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  type content_type [not null]
+  slug text [not null]
+  title text [not null]
+  youtube_id text [not null]
+  channel_id text [not null]
+  published_at "timestamp with time zone"
+  added_by uuid [not null]
+  status content_status [not null, default: 'pending']
+  created_at "timestamp with time zone" [not null, default: `now()`]
+  updated_at "timestamp with time zone" [not null, default: `now()`]
+
+  indexes {
+    slug [name: 'content_slug_idx', unique]
+    youtube_id [name: 'content_youtube_id_idx', unique]
+  }
+}
+
+table genres {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  slug text [not null, unique]
+  name text [not null, unique]
+}
+
+table short_film_meta {
+  content_id uuid [pk, not null]
+  director text
+  runtime_seconds integer
+  release_year integer
+  synopsis text
+  festival text
+}
+
+table ratings {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  content_id uuid [not null]
+  user_id uuid [not null]
+  score "numeric(3, 1)" [not null]
+  created_at "timestamp with time zone" [not null, default: `now()`]
+
+  indexes {
+    (content_id, user_id) [name: 'ratings_content_user_idx', unique]
+    
+  }
+}
+
+table review_votes {
+  review_id uuid [not null]
+  user_id uuid [not null]
+  vote smallint [not null]
+
+  indexes {
+    (review_id, user_id) [pk]
+    
+  }
+}
+
+table reviews {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  content_id uuid [not null]
+  user_id uuid [not null]
+  body text [not null]
+  created_at "timestamp with time zone" [not null, default: `now()`]
+  updated_at "timestamp with time zone" [not null, default: `now()`]
+}
+
+table content_genres {
+  content_id uuid [not null]
+  genre_id uuid [not null]
+
+  indexes {
+    (content_id, genre_id) [pk]
+  }
+}
+
+table list_items {
+  list_id uuid [not null]
+  content_id uuid [not null]
+  position integer [not null, default: 0]
+  added_at "timestamp with time zone" [not null, default: `now()`]
+
+  indexes {
+    (list_id, content_id) [pk]
+  }
+}
+
+table lists {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  user_id uuid [not null]
+  title text [not null]
+  slug text [not null, unique]
+  description text
+  is_public boolean [not null, default: false]
+  created_at "timestamp with time zone" [not null, default: `now()`]
+  updated_at "timestamp with time zone" [not null, default: `now()`]
+}
+
+table watchlist {
+  user_id uuid [not null]
+  content_id uuid [not null]
+  added_at "timestamp with time zone" [not null, default: `now()`]
+  watched_at "timestamp with time zone"
+
+  indexes {
+    (user_id, content_id) [pk]
+  }
+}
+
+ref: short_film_meta.content_id - content.id
+
+ref: ratings.content_id > content.id
+
+ref: review_votes.review_id > reviews.id
+
+ref: reviews.content_id > content.id
+
+ref: content_genres.content_id > content.id
+
+ref: content_genres.genre_id > genres.id
+
+ref: list_items.list_id > lists.id
+
+ref: list_items.content_id - content.id
+
+ref: watchlist.content_id - content.id
