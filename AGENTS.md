@@ -7,7 +7,7 @@ A discovery platform for short-form artistic video content (short films, music v
 - **Next.js 15** (App Router, Server Actions, Route Handlers)
 - **React 19**, **Tailwind CSS v4**, **shadcn/ui** (Radix primitives)
 - **Drizzle ORM** + **PostgreSQL** (Neon)
-- **Better Auth** (Google OAuth + Magic Link via Resend)
+- **Better Auth** (Google OAuth; Magic Link — post-MVP)
 - **Zustand** (client state) + **TanStack Query** (server state)
 - **React Hook Form** + **Zod** (forms)
 - **Biome** (lint + format) — replaces ESLint

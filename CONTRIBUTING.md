@@ -1,4 +1,4 @@
-# Contributing to RapidIT
+# Contributing to ShortyDB
 
 This document defines how we work together. Read it once before opening your first PR(Pull Request).
 
@@ -9,9 +9,8 @@ We use simple **GitHub Flow** — no `develop` branch, no Git Flow ceremony.
 1. Branch off `main`
 2. Push your branch, open a PR
 3. Get 1 review approval
-4. CI must pass
-5. Squash merge into `main`
-6. Delete branch
+4. Squash merge into `main`
+5. Delete branch
 
 `main` is always deployable. Don't push directly — branch protection enforces this.
 
@@ -88,8 +87,9 @@ Neon supports per-branch databases — use this for any non-trivial schema chang
 1. Create a Neon branch matching your git branch name
 2. Update `DATABASE_URL` locally to point at it
 3. Run `pnpm db:push` against the branch
-4. PR triggers a Vercel preview that uses your branch
-5. After merge, run migration on `main` branch DB
+4. After merge, run migration on `main` branch DB
+
+> **Note**: automatic Neon branch creation per PR is not yet wired up. For now, create and manage Neon branches manually via the Neon dashboard.
 
 Don't experiment with schema changes on the shared `dev` branch.
 
@@ -97,7 +97,7 @@ Don't experiment with schema changes on the shared `dev` branch.
 
 - Stuck >30 min? Ask in team chat — don't waste an hour silently
 - Stuck >2h? Pair with someone
-- Don't push broken code to a PR "to see if CI catches it"
+- Don't push broken code to a PR "to see if someone else catches it"
 
 ## Definition of Done
 

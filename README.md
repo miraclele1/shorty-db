@@ -38,29 +38,13 @@ If you can't get past step 3 in 15 minutes, ping the team lead — env setup sho
 - **Forms**: React Hook Form + Zod
 - **Backend**: Next.js Server Actions & Route Handlers, Node.js 22
 - **Database**: PostgreSQL on Neon, Drizzle ORM
-- **Auth**: Better Auth (Google + Magic Link via Resend)
-- **Email**: Resend + React Email
+- **Auth**: Better Auth (Google OAuth)
 - **Hosting**: Vercel
-- **Observability**: Sentry, Vercel Analytics + Speed Insights
-- **Dev tooling**: pnpm, Biome, GitHub Actions
+- **Observability**: Vercel Analytics + Speed Insights
+- **Dev tooling**: pnpm, Biome
 - **External APIs**: YouTube Data API v3
 
 For full architecture, decisions, and DB schema, see [ARCHITECTURE.md](./ARCHITECTURE.md).
-
-## Project Structure
-
-```
-src/
-├── app/              # Next.js App Router pages
-├── components/       # React components
-│   └── ui/           # shadcn/ui primitives
-├── lib/              # Shared utilities (client + server safe)
-├── server/           # Server-only code
-│   ├── actions/      # Server Actions (mutations)
-│   └── db/           # Drizzle schema + queries
-├── env.ts            # Validated env vars (t3-env)
-└── styles/
-```
 
 ## Scripts
 
