@@ -4,6 +4,10 @@ A discovery platform for short-form artistic content on YouTube. Curated, search
 
 > **Status**: MVP in development. Not yet production.
 
+## Onboarding
+
+New to the project? Start with [ONBOARDING.md](./ONBOARDING.md).
+
 ## Quick Start
 
 Requires **Node.js 22 LTS** and **pnpm**.
