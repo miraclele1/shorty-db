@@ -1,0 +1,116 @@
+PS C:\dev\shorty-db> pnpm lint
+
+> shorty-db@0.1.0 lint C:\dev\shorty-db
+> biome lint .
+
+src\app\films\[slug]\page.tsx:31:5 lint/performance/noImgElement ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ! Don't use <img> element.
+
+    29 │                        {/* Thumbnail */}
+    30 │                        <div className="aspect-video w-full bg-neutral-900 rounded-lg overflow-hidden mb-6">
+  > 31 │                                <img
+       │                                ^^^^
+  > 32 │                                        src={`https://img.youtube.com/vi/${film.youtubeId}/maxresdefault.jpg`}
+  > 33 │                                        alt={film.title}
+  > 34 │                                        className="w-full h-full object-cover"
+  > 35 │                                />
+       │                                ^^
+    36 │                        </div>
+    37 │ 
+
+  i Using the <img> can lead to slower LCP and higher bandwidth. Consider using <Image /> from next/image to automatically optimize images.
+
+
+src\components\ui\button.tsx:1:8 lint/style/useImportType  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ! All these imports are only used as types.
+
+  > 1 │ import * as React from "react"
+      │        ^^^^^^^^^^^^^^^^^^^^^^^
+    2 │ import { cva, type VariantProps } from "class-variance-authority"
+    3 │ import { Slot } from "radix-ui"
+
+  i Importing the types with import type ensures that they are removed by the compilers and avoids loading unnecessary modules.
+
+  i Safe fix: Use import type.
+
+    1 │ import·type·*·as·React·from·"react"
+      │        +++++
+
+src\app\globals.css:5:2 parse ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  × Tailwind-specific syntax is disabled.
+
+    3 │ @import "shadcn/tailwind.css";
+    4 │ 
+  > 5 │ @custom-variant dark (&:is(.dark *));
+      │  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    6 │ 
+    7 │ @theme inline {
+
+  i Enable `tailwindDirectives` in the css parser options, or remove this if you are not using Tailwind CSS.
+
+
+src\app\globals.css:7:2 parse ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  × Tailwind-specific syntax is disabled.
+
+     5 │ @custom-variant dark (&:is(.dark *));
+     6 │ 
+   > 7 │ @theme inline {
+       │  ^^^^^^^^^^^^^^
+   > 8 │   --color-background: var(--background);
+        ...
+  > 48 │   --radius-4xl: calc(var(--radius) * 2.6);
+  > 49 │ }
+       │ ^
+    50 │ 
+    51 │ :root {
+
+  i Enable `tailwindDirectives` in the css parser options, or remove this if you are not using Tailwind CSS.
+
+
+src\app\globals.css:122:6 parse ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  × Tailwind-specific syntax is disabled.
+
+    120 │ @layer base {
+    121 │   * {
+  > 122 │     @apply border-border outline-ring/50;
+        │      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    123 │   }
+    124 │   body {
+
+  i Enable `tailwindDirectives` in the css parser options, or remove this if you are not using Tailwind CSS.
+
+
+src\app\globals.css:125:6 parse ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  × Tailwind-specific syntax is disabled.
+
+    123 │   }
+    124 │   body {
+  > 125 │     @apply bg-background text-foreground;
+        │      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    126 │   }
+    127 │   html {
+
+  i Enable `tailwindDirectives` in the css parser options, or remove this if you are not using Tailwind CSS.
+
+
+src\app\globals.css:128:6 parse ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  × Tailwind-specific syntax is disabled.
+
+    126 │   }
+    127 │   html {
+  > 128 │     @apply font-sans;
+        │      ^^^^^^^^^^^^^^^^
+    129 │   }
+    130 │ }
+
+  i Enable `tailwindDirectives` in the css parser options, or remove this if you are not using Tailwind CSS.
+
+
+Checked 26 files in 53ms. No fixes applied.
+Found 5 errors.
+Found 2 warnings.
+lint ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  × Some errors were emitted while running checks.
+
+
+ ELIFECYCLE  Command failed with exit code 1.
