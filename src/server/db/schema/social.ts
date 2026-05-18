@@ -21,7 +21,7 @@ export const ratings = pgTable(
 		contentId: uuid("content_id")
 			.notNull()
 			.references(() => content.id, { onDelete: "cascade" }),
-		userId: uuid("user_id").notNull(),
+		userId: text("user_id").notNull(),
 		score: decimal("score", { precision: 3, scale: 1 }).notNull(),
 		createdAt: timestamp("created_at", { withTimezone: true })
 			.notNull()
@@ -47,7 +47,7 @@ export const reviews = pgTable("reviews", {
 	contentId: uuid("content_id")
 		.notNull()
 		.references(() => content.id, { onDelete: "cascade" }),
-	userId: uuid("user_id").notNull(),
+	userId: text("user_id").notNull(),
 	body: text("body").notNull(),
 	createdAt: timestamp("created_at", { withTimezone: true })
 		.notNull()
@@ -73,7 +73,7 @@ export const reviewVotes = pgTable(
 		reviewId: uuid("review_id")
 			.notNull()
 			.references(() => reviews.id, { onDelete: "cascade" }),
-		userId: uuid("user_id").notNull(),
+		userId: text("user_id").notNull(),
 		vote: smallint("vote").notNull(),
 	},
 	(t) => [

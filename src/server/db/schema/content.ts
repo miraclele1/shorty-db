@@ -38,7 +38,7 @@ export const content = pgTable(
 		youtubeId: text("youtube_id").notNull(),
 		channelId: text("channel_id").notNull(),
 		publishedAt: timestamp("published_at", { withTimezone: true }),
-		addedBy: uuid("added_by").notNull(),
+		addedBy: text("added_by").notNull(),
 		status: contentStatusEnum("status").notNull().default("pending"),
 		createdAt: timestamp("created_at", { withTimezone: true })
 			.notNull()

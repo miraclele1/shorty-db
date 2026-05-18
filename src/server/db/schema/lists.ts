@@ -14,7 +14,7 @@ import { content, genres } from "./content";
 
 export const lists = pgTable("lists", {
 	id: uuid("id").primaryKey().defaultRandom(),
-	userId: uuid("user_id").notNull(),
+	userId: text("user_id").notNull(),
 	title: text("title").notNull(),
 	slug: text("slug").notNull().unique(),
 	description: text("description"),
@@ -66,7 +66,7 @@ export const listItemsRelations = relations(listItems, ({ one }) => ({
 export const watchlist = pgTable(
 	"watchlist",
 	{
-		userId: uuid("user_id").notNull(),
+		userId: text("user_id").notNull(),
 		contentId: uuid("content_id")
 			.notNull()
 			.references(() => content.id, { onDelete: "cascade" }),
